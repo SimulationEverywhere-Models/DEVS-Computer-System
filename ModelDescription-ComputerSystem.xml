@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Models>
+	<Model name="ComputerSystem" type="coupled" description="coupled model consisiting of hardware coupled model, and fifo_queue atomic model.">
+		<Inputs>
+			<Port name="top_task_in" type="TaskMessage_t" description="port for accepting new tasks from ready queue"/>
+			<Port name="in_enable" type="bool" description="enables/disables the atomic clock model"/>
+		</Inputs>
+		<Outputs>
+			<Port name="top_task_out" type="TaskMessage_t" description="a task being evicted from the processor, may be complete or incomplete"/>
+			<Port name="out_busy" type="bool" description="indication of whether the processor is currently busy (true) or not busy (false)"/>
+		</Outputs>
+		<Files>
+			<File name="fifo_queue.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="processor.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="clock.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="task_message.hpp" type="H" location="ComputerSystem/data_structures"/>
+			<File name="task_message.cpp" type="CPP" location="ComputerSystem/data_structures"/>
+			<File name="coupled_processor_input.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="hardware_enable.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="main.cpp" type="CPP" location="ComputerSystem/top_model"/>
+			<File name="main_test_output_state.txt" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+			<File name="main_test_output_messages.text" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+		</Files>
+	</Model>
+	<Model name="Hardware" type="coupled" description="coupled model representing a simplified computer system's hardware - consists of a processor and a clock">
+		<Inputs>
+			<Port name="top_task_in" type="TaskMessage_t" description="port for accepting new tasks from ready queue"/>
+			<Port name="in_enable" type="bool" description="enables/disables the atomic clock model"/>
+		</Inputs>
+		<Outputs>
+			<Port name="top_task_out" type="TaskMessage_t" description="a task being evicted from the processor, may be complete or incomplete"/>
+			<Port name="out_busy" type="bool" description="indication of whether the processor is currently busy (true) or not busy (false)"/>
+		</Outputs>
+		<Files>
+			<File name="processor.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="clock.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="main.cpp" type="CPP" location="ComputerSystem/top_model"/>
+		</Files>
+	</Model>
+	<Model name="Queue" type="atomic" description="a queue that will store a fixed number of TaskMessage_t tasks, and will output tasks in fifo order when requested">
+		<Inputs>
+			<Port name="task_in" type="TaskMessage_t" description="ready queue input - may arrive at any time"/>
+			<Port name="givetask_in" type="bool" description="queue pop command : note the queue pops with false input"/>
+		</Inputs>
+		<Outputs>
+			<Port name="task_out" type="TaskMessage_t" description="ready queue output to be fed directly to processor input"/>
+			<Port name="size_out" type="int" description="a report of the current number of tasks in the queue"/>
+		</Outputs>
+		<Files>
+			<File name="fifo_queue.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="task_message.hpp" type="H" location="ComputerSystem/data_structures"/>
+			<File name="task_message.cpp" type="CPP" location="ComputerSystem/data_structures"/>
+			<File name="queue_newtask_input_test.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="queue_givetask_input_test.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="main_queue_test.cpp" type="CPP" location="ComputerSystem/test"/>
+			<File name="queue_test_output_state.txt" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+			<File name="queue_test_output_messages.text" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+		</Files>
+	</Model>
+	<Model name="Processor" type="atomic" description="processor model that accepts tasks and performs work on them">
+		<Inputs>
+			<Port name="clk_in" type="bool" description="digital clock signal that drives the clock model"/>
+			<Port name="task_in" type="TaskMessage_t" description="a port to pass task structure to the processor so that it may perform work"/>
+		</Inputs>
+		<Outputs>
+			<Port name="task_out" type="TaskMessage_t" description="a port to output a completed or patially completed task"/>
+			<Port name="busy_out" type="bool" description="an indicator to external models that the processor is idle or busy : busy = true"/>
+		</Outputs>
+		<Files>
+			<File name="processor.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="task_message.hpp" type="H" location="ComputerSystem/data_structures"/>
+			<File name="task_message.cpp" type="CPP" location="ComputerSystem/data_structures"/>
+			<File name="processor_clk_input_test.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="processor_task_input_test.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="main_processor_test.cpp" type="CPP" location="ComputerSystem/test"/>
+			<File name="processor_test_output_state.txt" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+			<File name="processor_test_output_messages.text" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+		</Files>
+	</Model>
+	<Model name="Clock" type="atomic" description="digital logic clock with a fixed clock peroid of 1 second">
+		<Inputs>
+			<Port name="in" type="bool" description="enable of clock model: true = enabled, false = passivated"/>
+		</Inputs>
+		<Outputs>
+			<Port name="out" type="bool" description="clock output level: high (true) or low (false)"/>
+		</Outputs>
+		<Files>
+			<File name="clock.hpp" type="H" location="ComputerSystem/atomics"/>
+			<File name="clock_input_test.txt" type="test input" location="ComputerSystem/input_data"/>
+			<File name="main_clock_test.cpp" type="CPP" location="ComputerSystem/test"/>
+			<File name="clock_test_output_state.txt" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+			<File name="clock_test_output_messages.text" type="SIM LOG" location="ComputerSystem/simulation_results"/>
+		</Files>
+	</Model>
+</Models>

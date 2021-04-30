@@ -20,6 +20,7 @@
 #include "../data_structures/task_message.hpp"
 #define MAX_QUEUE_SIZE  4
 #define WAITING         "WAITING"
+#define REQUESTED       "REQUESTED"
 #define POPTASK         "POPTASK"
 #define PUSHTASK        "PUSHTASK"
 
@@ -49,6 +50,7 @@ template<typename TIME> class FifoQueue{
           // state variables are queue structure, and QueueState
           string QueueState;
           queue<TaskMessage_t> TaskQueue;
+          TaskMessage_t OutputTask;
     };
     state_type state;
 
@@ -66,7 +68,6 @@ template<typename TIME> class FifoQueue{
           state.QueueState = WAITING;
         }
         else if(state.QueueState == POPTASK){
-          state.TaskQueue.pop();
           state.QueueState = WAITING;
         }
 
@@ -104,11 +105,16 @@ template<typename TIME> class FifoQueue{
         // a request has been made to the queue to output a task
         else if(bag_port_in_bool.size() == 1){
 
-          // if there are items in the queue and the state is waiting, set the state to POPTASK, otherwise
-          bool givetask = bag_port_in_bool[0];
+          // if there are items in the queue, the state is waiting, and givetask is low (processor is not busy)
+          bool givetask = !bag_port_in_bool[0]; // inverted because the processor outputs true when busy
           bool should_give_task = ((givetask == true) && (state.QueueState == WAITING) && (state.TaskQueue.size() > 0));
           if(should_give_task){
+            state.OutputTask =  state.TaskQueue.front();
+            state.TaskQueue.pop();
             state.QueueState = POPTASK;
+          }
+          else{
+
           }
         }
 
@@ -135,10 +141,10 @@ template<typename TIME> class FifoQueue{
         }
         else if(state.QueueState == POPTASK){
           vector<TaskMessage_t> bag_port_out_task;
-          bag_port_out_task.push_back(state.TaskQueue.front());
+          bag_port_out_task.push_back(state.OutputTask);
           get_messages<typename FifoQueue_defs::task_out>(bags) = bag_port_out_task;
 
-          bag_port_out_int.push_back(state.TaskQueue.size() - 1);
+          bag_port_out_int.push_back(state.TaskQueue.size());
           get_messages<typename FifoQueue_defs::size_out>(bags) = bag_port_out_int;
         }
         else{
@@ -161,6 +167,9 @@ template<typename TIME> class FifoQueue{
         else if (state.QueueState == WAITING){
             next_internal = numeric_limits<TIME>::infinity();
         }
+        else if (state.QueueState == REQUESTED){
+            next_internal = numeric_limits<TIME>::infinity();
+        }
         else{
           assert(false && "ERROR IN TIME ADVANCE FUNCTION");
         }
@@ -169,7 +178,13 @@ template<typename TIME> class FifoQueue{
 
     /***** (10) *****/
     friend ostringstream& operator<<(ostringstream& os, const typename FifoQueue<TIME>::state_type& i) {
-        os << "state: " << i.QueueState << " & queue size: " << i.TaskQueue.size();
+        os << "state: " << i.QueueState << " & queue size: " << i.TaskQueue.size() << endl;
+        queue<TaskMessage_t> q = i.TaskQueue;
+        os << "QUEUE DATA:";
+        while(!q.empty()){
+          os << '\t' << q.front();
+          q.pop();
+        }
         return os;
     }
 };

@@ -1,0 +1,120 @@
+00:00:00:000
+State for model input_reader_newtask is next time: 00:00:00:000
+State for model input_reader_givetask is next time: 00:00:00:000
+State for model fifo_queue1 is state: WAITING & queue size: 0
+QUEUE DATA:
+00:00:00:000
+State for model input_reader_newtask is next time: 00:00:10:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: WAITING & queue size: 0
+QUEUE DATA:
+00:00:10:000
+State for model input_reader_newtask is next time: 00:00:01:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: PUSHTASK & queue size: 1
+QUEUE DATA:	1 10
+00:00:10:000
+State for model input_reader_newtask is next time: 00:00:01:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: WAITING & queue size: 1
+QUEUE DATA:	1 10
+00:00:11:000
+State for model input_reader_newtask is next time: 00:00:01:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: PUSHTASK & queue size: 2
+QUEUE DATA:	1 10	2 20
+00:00:11:000
+State for model input_reader_newtask is next time: 00:00:01:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: WAITING & queue size: 2
+QUEUE DATA:	1 10	2 20
+00:00:12:000
+State for model input_reader_newtask is next time: 00:00:02:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: PUSHTASK & queue size: 3
+QUEUE DATA:	1 10	2 20	3 30
+00:00:12:000
+State for model input_reader_newtask is next time: 00:00:02:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: WAITING & queue size: 3
+QUEUE DATA:	1 10	2 20	3 30
+00:00:14:000
+State for model input_reader_newtask is next time: 00:00:01:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: PUSHTASK & queue size: 4
+QUEUE DATA:	1 10	2 20	3 30	4 40
+00:00:14:000
+State for model input_reader_newtask is next time: 00:00:01:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: WAITING & queue size: 4
+QUEUE DATA:	1 10	2 20	3 30	4 40
+00:00:15:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:16:000
+State for model fifo_queue1 is state: WAITING & queue size: 4
+QUEUE DATA:	1 10	2 20	3 30	4 40
+00:00:16:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: POPTASK & queue size: 3
+QUEUE DATA:	2 20	3 30	4 40
+00:00:16:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: WAITING & queue size: 3
+QUEUE DATA:	2 20	3 30	4 40
+00:00:17:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: POPTASK & queue size: 2
+QUEUE DATA:	3 30	4 40
+00:00:17:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: WAITING & queue size: 2
+QUEUE DATA:	3 30	4 40
+00:00:18:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:02:000
+State for model fifo_queue1 is state: POPTASK & queue size: 1
+QUEUE DATA:	4 40
+00:00:18:000
+State for model input_reader_newtask is next time: 00:00:04:000
+State for model input_reader_givetask is next time: 00:00:02:000
+State for model fifo_queue1 is state: WAITING & queue size: 1
+QUEUE DATA:	4 40
+00:00:19:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: 00:00:02:000
+State for model fifo_queue1 is state: PUSHTASK & queue size: 2
+QUEUE DATA:	4 40	6 45
+00:00:19:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: 00:00:02:000
+State for model fifo_queue1 is state: WAITING & queue size: 2
+QUEUE DATA:	4 40	6 45
+00:00:20:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: POPTASK & queue size: 1
+QUEUE DATA:	6 45
+00:00:20:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: WAITING & queue size: 1
+QUEUE DATA:	6 45
+00:00:21:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: POPTASK & queue size: 0
+QUEUE DATA:
+00:00:21:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: 00:00:01:000
+State for model fifo_queue1 is state: WAITING & queue size: 0
+QUEUE DATA:
+00:00:22:000
+State for model input_reader_newtask is next time: inf
+State for model input_reader_givetask is next time: inf
+State for model fifo_queue1 is state: WAITING & queue size: 0
+QUEUE DATA:
